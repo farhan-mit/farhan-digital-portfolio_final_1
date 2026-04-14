@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Shaikh Farhan Husen | Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #0a0a0f;
+      --surface: #111118;
+      --card: #16161f;
+      --border: #2a2a3a;
+      --accent: #6ee7f7;
+      --accent2: #a78bfa;
+      --accent3: #f472b6;
+      --text: #e8e8f0;
+      --muted: #7a7a9a;
+      --glow: rgba(110,231,247,0.15);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Mono', monospace;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.6;
+    }
+    .grid-bg {
+      position: fixed; inset: 0;
+      background-image: linear-gradient(rgba(110,231,247,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(110,231,247,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      z-index: 0; pointer-events: none;
+    }
+    .blob { position: fixed; border-radius: 50%; filter: blur(80px); opacity: 0.12; pointer-events: none; z-index: 0; animation: drift 12s ease-in-out infinite alternate; }
+    .blob1 { width: 500px; height: 500px; background: var(--accent); top: -150px; left: -150px; }
+    .blob2 { width: 400px; height: 400px; background: var(--accent2); bottom: 10%; right: -100px; animation-delay: -6s; }
+    .blob3 { width: 300px; height: 300px; background: var(--accent3); top: 40%; left: 30%; animation-delay: -3s; }
+    @keyframes drift { from { transform: translate(0,0) scale(1); } to { transform: translate(30px,20px) scale(1.05); } }
+    .wrapper { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+    nav { position: sticky; top: 0; z-index: 100; backdrop-filter: blur(20px); background: rgba(10,10,15,0.7); border-bottom: 1px solid var(--border); }
+    nav .wrapper { display: flex; justify-content: space-between; align-items: center; padding-top: 1rem; padding-bottom: 1rem; }
+    .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem; color: var(--accent); }
+    .nav-links { display: flex; gap: 2rem; }
+    .nav-links a { text-decoration: none; color: var(--muted); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--accent); }
+    .hero { min-height: 92vh; display: flex; align-items: center; padding: 6rem 0 4rem; }
+    .hero-inner { display: grid; grid-template-columns: 1fr auto; gap: 4rem; align-items: center; width: 100%; }
+    .hero-tag { display: inline-block; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); background: rgba(110,231,247,0.08); border: 1px solid rgba(110,231,247,0.2); padding: 0.35rem 0.9rem; border-radius: 2rem; margin-bottom: 1.8rem; animation: fadeUp 0.6s ease both; }
+    .hero-name { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(2.8rem,6vw,5rem); line-height: 1.05; letter-spacing: -0.03em; margin-bottom: 0.5rem; animation: fadeUp 0.6s 0.1s ease both; }
+    .hero-name span { color: var(--accent); }
+    .hero-role { font-family: 'Instrument Serif', serif; font-style: italic; font-size: clamp(1.1rem,2.5vw,1.5rem); color: var(--muted); margin-bottom: 1.5rem; animation: fadeUp 0.6s 0.2s ease both; }
+    .hero-desc { font-size: 0.88rem; line-height: 1.85; color: var(--muted); max-width: 520px; margin-bottom: 2.5rem; animation: fadeUp 0.6s 0.3s ease both; }
+    .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; animation: fadeUp 0.6s 0.4s ease both; }
+    .btn { padding: 0.75rem 1.8rem; border-radius: 0.5rem; font-family: 'DM Mono', monospace; font-size: 0.8rem; letter-spacing: 0.06em; cursor: pointer; text-decoration: none; transition: all 0.25s; display: inline-flex; align-items: center; gap: 0.5rem; }
+    .btn-primary { background: var(--accent); color: #0a0a0f; font-weight: 500; border: none; }
+    .btn-primary:hover { background: #a5f0fd; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(110,231,247,0.25); }
+    .btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border); }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+    .hero-avatar { animation: fadeUp 0.6s 0.2s ease both; }
+    .avatar-ring { width: 200px; height: 200px; border-radius: 50%; background: conic-gradient(var(--accent), var(--accent2), var(--accent3), var(--accent)); padding: 3px; animation: spinSlow 8s linear infinite; }
+    @keyframes spinSlow { to { transform: rotate(360deg); } }
+    .avatar-inner { width: 100%; height: 100%; border-radius: 50%; background: var(--bg); display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-size: 3.5rem; font-weight: 800; color: var(--accent); animation: spinSlow 8s linear infinite reverse; }
+    .avatar-inner img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    section { padding: 5rem 0; }
+    .section-label { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.8rem; }
+    .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); max-width: 80px; }
+    .section-title { font-family: 'Syne', sans-serif; font-size: clamp(1.8rem,3.5vw,2.6rem); font-weight: 700; margin-bottom: 3rem; letter-spacing: -0.02em; }
+    .info-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.2rem; }
+    .info-card { background: var(--card); border: 1px solid var(--border); border-radius: 1rem; padding: 1.5rem; transition: all 0.3s; position: relative; overflow: hidden; }
+    .info-card::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, var(--glow), transparent); opacity: 0; transition: opacity 0.3s; }
+    .info-card:hover { border-color: rgba(110,231,247,0.3); transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,0.3); }
+    .info-card:hover::before { opacity: 1; }
+    .card-icon { font-size: 1.5rem; margin-bottom: 0.8rem; display: block; }
+    .card-label { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.3rem; }
+    .card-value { font-size: 0.95rem; color: var(--text); word-break: break-all; }
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }
+    .skill-item { background: var(--card); border: 1px solid var(--border); border-radius: 0.75rem; padding: 1.2rem 1.5rem; display: flex; align-items: center; gap: 1rem; transition: all 0.3s; }
+    .skill-item:hover { border-color: var(--accent2); transform: translateX(4px); background: #1c1c28; }
+    .skill-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+    .skill-item:nth-child(2) .skill-dot { background: var(--accent2); }
+    .skill-item:nth-child(3) .skill-dot { background: var(--accent3); }
+    .skill-item:nth-child(4) .skill-dot { background: #fbbf24; }
+    .skill-item:nth-child(5) .skill-dot { background: #4ade80; }
+    .skill-name { font-size: 0.9rem; font-weight: 500; }
+    .skill-level { font-size: 0.65rem; color: var(--muted); margin-top: 0.1rem; }
+    .cert-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.2rem; }
+    .cert-card { background: var(--card); border: 1px solid var(--border); border-radius: 1rem; padding: 1.8rem; display: flex; align-items: flex-start; gap: 1.2rem; transition: all 0.3s; position: relative; overflow: hidden; }
+    .cert-card::after { content: '✓ Verified'; position: absolute; top: 1rem; right: 1.2rem; font-size: 0.65rem; color: #4ade80; background: rgba(74,222,128,0.1); border: 1px solid rgba(74,222,128,0.2); border-radius: 2rem; padding: 0.15rem 0.5rem; }
+    .cert-card:hover { border-color: rgba(167,139,250,0.4); transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,0.3); }
+    .cert-icon { font-size: 2.2rem; flex-shrink: 0; }
+    .cert-org { font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent2); margin-bottom: 0.3rem; }
+    .cert-name { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 1rem; margin-bottom: 0.4rem; }
+    .cert-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.6; }
+    .edu-card { background: var(--card); border: 1px solid var(--border); border-radius: 1rem; padding: 2rem 2.5rem; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1.5rem; position: relative; overflow: hidden; transition: all 0.3s; }
+    .edu-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: linear-gradient(var(--accent), var(--accent2)); }
+    .edu-card:hover { border-color: rgba(110,231,247,0.3); box-shadow: 0 12px 32px rgba(0,0,0,0.3); }
+    .edu-badge { display: inline-block; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent3); background: rgba(244,114,182,0.08); border: 1px solid rgba(244,114,182,0.2); padding: 0.25rem 0.75rem; border-radius: 2rem; margin-bottom: 0.8rem; }
+    .edu-degree { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.3rem; margin-bottom: 0.3rem; }
+    .edu-college { color: var(--muted); font-size: 0.88rem; }
+    .edu-year-val { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; color: var(--accent); opacity: 0.5; }
+    .edu-status { font-size: 0.7rem; color: #4ade80; letter-spacing: 0.1em; }
+    .contact-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; }
+    .contact-item { background: var(--card); border: 1px solid var(--border); border-radius: 0.75rem; padding: 1.4rem 1.6rem; display: flex; align-items: center; gap: 1rem; text-decoration: none; color: var(--text); transition: all 0.3s; }
+    .contact-item:hover { border-color: var(--accent); transform: translateY(-2px); color: var(--accent); }
+    .contact-emoji { font-size: 1.5rem; flex-shrink: 0; }
+    .contact-label { font-size: 0.65rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.2rem; }
+    .contact-val { font-size: 0.88rem; }
+    footer { border-top: 1px solid var(--border); padding: 2.5rem 0; text-align: center; color: var(--muted); font-size: 0.78rem; }
+    footer span { color: var(--accent); }
+    .about-card { background: var(--card); border: 1px solid var(--border); border-radius: 1rem; padding: 2.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: center; }
+    .about-text { font-size: 0.9rem; line-height: 2; color: var(--muted); }
+    .about-text strong { color: var(--text); }
+    .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .stat-box { background: var(--surface); border: 1px solid var(--border); border-radius: 0.75rem; padding: 1.2rem; text-align: center; }
+    .stat-num { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; color: var(--accent); display: block; }
+    .stat-label { font-size: 0.7rem; color: var(--muted); margin-top: 0.2rem; }
+    @media (max-width: 700px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-avatar { display: flex; justify-content: center; order: -1; }
+      .avatar-ring { width: 140px; height: 140px; }
+      .avatar-inner { font-size: 2.5rem; }
+      .about-card { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="grid-bg"></div>
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+
+  <nav>
+    <div class="wrapper">
+      <div class="nav-logo">SFH.dev</div>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#education">Education</a>
+        <a href="#skills">Skills</a>
+        <a href="#certifications">Certs</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero" id="home">
+    <div class="wrapper">
+      <div class="hero-inner">
+        <div>
+          <div class="hero-tag">🎓 First Year CS Student · MIT AOE</div>
+          <h1 class="hero-name">Shaikh<br><span>Farhan</span> Husen</h1>
+          <p class="hero-role">Web Developer &amp; Programmer</p>
+          <p class="hero-desc">
+            A passionate fresher from <strong style="color:var(--text)">MIT Academy of Engineering</strong>, eager to build the web and explore the world of technology. I love crafting websites, writing clean code, and growing every single day.
+          </p>
+          <div class="hero-cta">
+            <a href="#contact" class="btn btn-primary">📬 Get In Touch</a>
+            <a href="#skills" class="btn btn-outline">⚡ View Skills</a>
+          </div>
+        </div>
+        <div class="hero-avatar">
+          <div class="avatar-ring">
+            <div class="avatar-inner"><img src="img1.jpeg" alt="Shaikh Farhan Husen"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrapper">
+      <p class="section-label">01 — About Me</p>
+      <h2 class="section-title">Who I Am</h2>
+      <div class="about-card">
+        <div>
+          <p class="about-text">
+            Hi! I'm <strong>Shaikh Farhan Husen</strong>, a first-year B.Tech Computer Science student at <strong>MIT Academy of Engineering (MIT AOE)</strong>, Pune, Maharashtra.<br/><br/>
+            I am a <strong>fresher</strong> with a deep passion for technology and web development. I love turning ideas into reality through code — especially building websites. My goal is to master modern web technologies and create impactful digital experiences.<br/><br/>
+            I believe in continuous learning and am always excited to explore new technologies and challenges.
+          </p>
+        </div>
+        <div class="about-stats">
+          <div class="stat-box">
+            <span class="stat-num">3+</span>
+            <div class="stat-label">Languages Known</div>
+          </div>
+          <div class="stat-box">
+            <span class="stat-num">2</span>
+            <div class="stat-label">Certifications</div>
+          </div>
+          <div class="stat-box">
+            <span class="stat-num">1st</span>
+            <div class="stat-label">Year of Study</div>
+          </div>
+          <div class="stat-box">
+            <span class="stat-num">∞</span>
+            <div class="stat-label">Curiosity</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="wrapper">
+      <p class="section-label">02 — Education</p>
+      <h2 class="section-title">Academic Background</h2>
+      <div class="edu-card">
+        <div>
+          <div class="edu-badge">Currently Enrolled</div>
+          <div class="edu-degree">B.Tech — Computer Science &amp; Engineering</div>
+          <div class="edu-college">MIT Academy of Engineering (MIT AOE) · Pune, Maharashtra, India</div>
+        </div>
+        <div>
+          <div class="edu-year-val">2024</div>
+          <div class="edu-status">▲ 1st Year · Active</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="wrapper">
+      <p class="section-label">03 — Technical Skills</p>
+      <h2 class="section-title">What I Work With</h2>
+      <div class="skills-grid">
+        <div class="skill-item">
+          <div class="skill-dot"></div>
+          <div><div class="skill-name">HTML &amp; CSS</div><div class="skill-level">Web Development</div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-dot"></div>
+          <div><div class="skill-name">Python</div><div class="skill-level">General Purpose</div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-dot"></div>
+          <div><div class="skill-name">C Language</div><div class="skill-level">Systems / Foundation</div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-dot"></div>
+          <div><div class="skill-name">Website Development</div><div class="skill-level">Core Passion</div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-dot"></div>
+          <div><div class="skill-name">Problem Solving</div><div class="skill-level">Analytical Thinking</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="certifications">
+    <div class="wrapper">
+      <p class="section-label">04 — Certifications</p>
+      <h2 class="section-title">Credentials &amp; Achievements</h2>
+      <div class="cert-grid">
+        <div class="cert-card">
+          <div class="cert-icon">🤖</div>
+          <div>
+            <div class="cert-org">Anthropic</div>
+            <div class="cert-name">AI &amp; Claude Certification</div>
+            <div class="cert-desc">Certified by Anthropic — the leading AI safety company behind Claude AI, recognising foundational knowledge of AI and its responsible use.</div>
+          </div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-icon">🏅</div>
+          <div>
+            <div class="cert-org">NASSCOM</div>
+            <div class="cert-name">NASSCOM Certification</div>
+            <div class="cert-desc">Certified by NASSCOM — India's premier IT industry body, validating core technology skills and industry readiness for the digital era.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrapper">
+      <p class="section-label">05 — Contact</p>
+      <h2 class="section-title">Let's Connect</h2>
+      <div class="contact-grid">
+        <a href="mailto:shaikhfarhan90888@gmail.com" class="contact-item">
+          <span class="contact-emoji">📧</span>
+          <div><div class="contact-label">Email</div><div class="contact-val">shaikhfarhan90888@gmail.com</div></div>
+        </a>
+        <a href="tel:+918767216917" class="contact-item">
+          <span class="contact-emoji">📱</span>
+          <div><div class="contact-label">Mobile</div><div class="contact-val">+91 87672 16917</div></div>
+        </a>
+        <div class="contact-item">
+          <span class="contact-emoji">🏛️</span>
+          <div><div class="contact-label">Institution</div><div class="contact-val">MIT AOE, Pune</div></div>
+        </div>
+        <div class="contact-item">
+          <span class="contact-emoji">📍</span>
+          <div><div class="contact-label">Location</div><div class="contact-val">Maharashtra, India</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrapper">
+      <p>Designed &amp; Built by <span>Shaikh Farhan Husen</span> &nbsp;·&nbsp; MIT AOE &nbsp;·&nbsp; <span>2024–Present</span></p>
+    </div>
+  </footer>
+</body>
+</html>
